@@ -1,0 +1,14 @@
+{
+  "name": "van-react-gulp-browserify",
+  "version": "0.0.1",
+  "description": "Trying to make sense of react and browserify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Van J. Wilson",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
