@@ -1,7 +1,7 @@
 'use strict';
 
-var aLongVariableName = 'it works!';
-var anotherLongVariableName = 'it still works!';
+let aLongVariableName = 'it works!';
+let anotherLongVariableName = 'it still works!';
 
 console.log(aLongVariableName);
 

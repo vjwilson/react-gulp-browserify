@@ -76,7 +76,7 @@ function compile(setWatch) {
       packageCache: {},
       fullPaths: false
     })
-    .transform(babelify);
+    .transform('babelify', {presets: ['es2015']});
 
   function rebundle() {
     bundler.bundle()
