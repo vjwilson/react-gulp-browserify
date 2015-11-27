@@ -69,12 +69,14 @@ function map_error(err) {
 
 }
 
-function compile(watch) {
-  var bundler = watchify(
-    browserify(paths.src.entry, {
-      debug: true
-    }).transform(babelify)
-  );
+function compile(setWatch) {
+  var bundler = browserify(paths.src.entry, {
+      debug: true,
+      cache: {},
+      packageCache: {},
+      fullPaths: false
+    })
+    .transform(babelify);
 
   function rebundle() {
     bundler.bundle()
@@ -92,7 +94,8 @@ function compile(watch) {
       .pipe(gulp.dest(paths.dev.js))
   }
 
-  if (watch) {
+  if (setWatch) {
+    bundler = watchify(bundler);
     bundler.on('update', function() {
       console.log('-> rebundling...');
       rebundle();
@@ -103,52 +106,19 @@ function compile(watch) {
 
 }
 
-function watch() {
-  return compile(true);
-}
-
 gulp.task('browserify', function() {
-  return compile();
+  var setWatch = false;
+  return compile(setWatch);
 });
 gulp.task('watchify', function() {
-  return watch();
+  var setWatch = true;
+  return compile(setWatch);
 });
 
 gulp.task('build', ['copy', 'css:app', 'browserify']);
-gulp.task('watch', ['copy', 'css:app', 'watchify']);
 
+gulp.task('watch', ['copy', 'css:app', 'watchify'], function() {
+  gulp.watch(paths.src.css, ['css:app']);
+});
 
 gulp.task('default', ['watch']);
-
-// // build app js
-// gulp.task('js:app', function() {
-//   return gulp.src(paths.src.js)
-//     .pipe(uglify())
-//     .pipe(gulp.dest(paths.dev.js));
-// });
-
-// function bundle_js(bundler) {
-//   return bundler.bundle()
-//     .on('error', map_error)
-//     .pipe(source('app.js'))
-//     // .pipe(buffer())
-//     // .pipe(gulp.dest('app/dist'))
-//     // .pipe(rename('app.min.js'))
-//     // .pipe(sourcemaps.init({ loadMaps: true }))
-//     //   // capture sourcemaps from transforms
-//     //   .pipe(uglify())
-//     // .pipe(sourcemaps.write('.'))
-//     .pipe(gulp.dest(paths.dev.js))
-// }
-
-// // Without watchify
-// gulp.task('browserify', function () {
-//   var bundler = browserify(paths.src.root + '/assets/js/app.js', { 
-//     cache: {},
-//     packageCache: {},
-//     fullPaths: false,
-//     debug: true
-//   });
-
-//   return bundle_js(bundler);
-// });
