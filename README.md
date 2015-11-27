@@ -25,8 +25,6 @@ For now, you have to run your own server with its document root in the `dev_buil
 
 ## Roadmap
 
-TODO: add a _clean_ task
-
 TODO: add a development server
 
 TODO: add a browser-reload solution, like browser-sync

@@ -8,6 +8,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var jshint = require('gulp-jshint');
+var del = require('del');
 
 /* nicer browserify errors */
 var util = require('gulp-util')
@@ -31,6 +32,12 @@ var paths = {
   }
 };
 
+// Remove previous build
+gulp.task('clean', function() {
+  return del([paths.dev.root]);
+});
+
+
 // JSHint task
 gulp.task('lint', function() {
   gulp.src(paths.src.js)
@@ -39,13 +46,13 @@ gulp.task('lint', function() {
 });
 
 // Build HTML files
-gulp.task('copy', function(){
+gulp.task('copy', ['clean'], function(){
   gulp.src(paths.src.html)
     .pipe(gulp.dest(paths.dev.root));
 });
 
 // build app styles
-gulp.task('css:app', function() {
+gulp.task('css:app', ['clean'], function() {
   return gulp.src(paths.src.root + '/assets/css/main.scss')
     .pipe(sass({
       sourcemap : true,
@@ -115,11 +122,11 @@ function compile(setWatch) {
 
 }
 
-gulp.task('browserify', function() {
+gulp.task('browserify', ['clean'], function() {
   var setWatch = false;
   return compile(setWatch);
 });
-gulp.task('watchify', function() {
+gulp.task('watchify', ['clean'], function() {
   var setWatch = true;
   return compile(setWatch);
 });
