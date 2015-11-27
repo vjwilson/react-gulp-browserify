@@ -6,7 +6,8 @@ var babelify = require('babelify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-var sourcemaps = require('gulp-sourcemaps')
+var sourcemaps = require('gulp-sourcemaps');
+var jshint = require('gulp-jshint');
 
 /* nicer browserify errors */
 var util = require('gulp-util')
@@ -30,6 +31,14 @@ var paths = {
   }
 };
 
+// JSHint task
+gulp.task('lint', function() {
+  gulp.src(paths.src.js)
+  .pipe(jshint())
+  .pipe(jshint.reporter('default'));
+});
+
+// Build HTML files
 gulp.task('copy', function(){
   gulp.src(paths.src.html)
     .pipe(gulp.dest(paths.dev.root));
