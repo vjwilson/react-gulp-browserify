@@ -1,13 +1,17 @@
 {
   "name": "van-react-gulp-browserify",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Trying to make sense of react and browserify",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Van J. Wilson",
   "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/vjwilson/react-gulp-browserify.git"
+  },
   "devDependencies": {
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
