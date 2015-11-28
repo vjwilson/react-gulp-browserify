@@ -30,3 +30,13 @@ If you suspect that a file is not updating, you can start from a fresh build dir
 TODO: add testing
 
 TODO: add code that actually does something
+
+## Changelog
+
+* 0.0.5 Added development server and browser-sync
+* 0.0.4 Added ES6 and React transforms to JS build process
+* 0.0.3 Added Browserify to JS build process
+* 0.0.2 Added SASS compilation and basic JS build process
+* 0.0.1 Initial project setup
+
+
