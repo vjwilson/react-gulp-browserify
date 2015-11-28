@@ -9,9 +9,9 @@ A sample app to learn about building React apps with gulp and browserify
 
 ## Running the app
 
-The gulp file will compile the styles (SASS), convert the React and ES2015 features to standard Javascript and bundle the code, and copy all the necessary files to a `dev_build/` directory.
+The gulp file will compile the styles (SASS), convert the React and ES2015 features to standard Javascript and bundle the code, and copy all the necessary files to a `dev_build/` directory, and launch Browser-Sync.
 
-        gulp watch
+        gulp serve
       
         # or just plain
       
@@ -21,10 +21,12 @@ To just build the app without watching the files,
 
         gulp build
 
-For now, you have to run your own server with its document root in the `dev_build/` directory.
+If you suspect that a file is not updating, you can start from a fresh build directory by running,
+
+        gulp clean
 
 ## Roadmap
 
-TODO: add a development server
+TODO: add testing
 
-TODO: add a browser-reload solution, like browser-sync
+TODO: add code that actually does something
